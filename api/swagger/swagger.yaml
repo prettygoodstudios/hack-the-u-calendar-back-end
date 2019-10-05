@@ -39,6 +39,25 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Creates user
+      operationId: createUser
+      parameters: 
+      - name: name
+        in: query
+        description: The name of the user requested to be created
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/UserResponse"
+        default: 
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
