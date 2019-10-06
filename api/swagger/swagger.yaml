@@ -18,6 +18,42 @@ consumes:
 produces:
   - application/json
 paths:
+  /projects: 
+    x-swagger-router-controller: projects
+    post:
+      description: Creates project
+      operationId: createProject
+      parameters: 
+       - name: name 
+         in: query
+         description: Name of project
+         required: true 
+         type: string 
+       - name: type 
+         in: query
+         description: Type of project 
+         type: number 
+         required: true 
+       - name: start_time
+         in: query 
+         description: Start of project 
+         type: string 
+         required: true
+       - name: deadline 
+         in: query
+         description: End of projects
+         type: string
+         required: true
+      responses: 
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ProjectResponse"
+        default: 
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /users: 
     x-swagger-router-controller: users
     get: 
@@ -63,6 +99,12 @@ paths:
 # complex objects have schema definitions
 definitions:
   UserResponse:
+    required:
+      - message
+    properties:
+      message: 
+        type: object
+  ProjectResponse:
     required:
       - message
     properties:

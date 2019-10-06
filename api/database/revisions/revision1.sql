@@ -26,3 +26,12 @@ CREATE TABLE `calendar_users` (
   UNIQUE KEY `uid_UNIQUE` (`uid`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 );
+
+
+CREATE TABLE `calendar_schedules` (
+  `sid` int(11) NOT NULL AUTO_INCREMENT,
+  `start_time` DATETIME NOT NULL,
+   `deadline` DATETIME NOT NULL,
+  PRIMARY KEY (`sid`),
+  UNIQUE KEY `sid_UNIQUE` (`sid`)
+);
