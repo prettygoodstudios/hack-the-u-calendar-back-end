@@ -8,6 +8,7 @@ function getSchedules(req, res){
             }
         });
     }).catch((error) => {
+        res.status(400);
         res.send({
             message: {
                 error
@@ -25,6 +26,7 @@ function getMySchedules(req, res){
             }
         });
     }).catch((error) => {
+        res.status(400);
         res.send({
             message: {
                 error

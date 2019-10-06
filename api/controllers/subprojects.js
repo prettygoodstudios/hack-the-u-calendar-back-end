@@ -9,6 +9,7 @@ function createSubProject(req, res){
             }
         })
     }).catch((error) => {
+        res.status(400);
         res.send({
             message: {
                 error

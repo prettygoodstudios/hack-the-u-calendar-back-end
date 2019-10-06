@@ -9,6 +9,7 @@ function createProject(req, res){
             }
         });
     }).catch((error) => {
+        res.status(400);
         res.send({
             message: {
                 error
@@ -26,6 +27,7 @@ function getProjects(req, res){
             }
         });
     }).catch((error) => {
+        res.status(403);
         res.send({
             message: {
                 error: "Could not retrieve projects."
@@ -43,6 +45,7 @@ function deleteProject(req, res){
             }
         });
     }).catch((error) => {
+        res.status(403);
         res.send({
             message: {
                 error
