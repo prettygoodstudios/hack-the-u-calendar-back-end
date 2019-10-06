@@ -18,6 +18,37 @@ consumes:
 produces:
   - application/json
 paths:
+  /subprojects:
+    x-swagger-router-controller: subprojects
+    post:
+      description: Creates Subproject
+      operationId: createSubProject
+      parameters: 
+       - name: pid 
+         in: query
+         description: pid of parent project
+         required: true 
+         type: string 
+       - name: schid 
+         in: query
+         description: schid of parent project
+         required: true 
+         type: string
+       - name: name 
+         in: query
+         description: name of subproject
+         required: true 
+         type: string  
+      responses: 
+          "200":
+            description: Success
+            schema:
+              # a pointer to a definition
+              $ref: "#/definitions/ScheduleResponse"
+          default: 
+            description: Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
   /schedules:
     x-swagger-router-controller: schedules
     get: 
