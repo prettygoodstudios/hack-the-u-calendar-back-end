@@ -1,8 +1,8 @@
 const {createProjectInDatabase, getProjectsInDatabase} = require("../models/projects");
 
 function createProject(req, res){
-    const {start_time, deadline, name, type} = req.query;
-    createProjectInDatabase(name, type, start_time, deadline).then((data) => {
+    const {start_time, deadline, name, type, uid} = req.query;
+    createProjectInDatabase(name, type, start_time, deadline, uid).then((data) => {
         res.send({
             message: {
                 success: "Successfully created project!"
@@ -18,10 +18,11 @@ function createProject(req, res){
 }
 
 function getProjects(req, res){
-    getProjectsInDatabase().then((projects) => {
+    const {uid} = req.query;
+    getProjectsInDatabase(uid).then((projects) => {
         res.send({
             message: {
-                ...projects
+                projects
             }
         });
     }).catch((error) => {

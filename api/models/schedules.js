@@ -25,7 +25,20 @@ function getSchedulesInDatabase(){
     });
 }
 
+function getMySchedulesInDatabase(uid){
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT cs.*, cp.* FROM calendar_schedules cs LEFT JOIN calendar_projects cp ON cs.sid = cp.schid WHERE cp.uid = ?", [uid], (error, results, fields) => {
+            if(error){
+                reject(error);
+            }else{
+                resolve(results);
+            }
+        });
+    });
+}
+
 module.exports = {
     createScheduleInDatabase,
-    getSchedulesInDatabase
+    getSchedulesInDatabase,
+    getMySchedulesInDatabase
 }

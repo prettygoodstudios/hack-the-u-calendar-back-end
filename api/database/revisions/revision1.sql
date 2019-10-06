@@ -35,3 +35,5 @@ CREATE TABLE `calendar_schedules` (
   PRIMARY KEY (`sid`),
   UNIQUE KEY `sid_UNIQUE` (`sid`)
 );
+
+ALTER TABLE calendar_projects ADD COLUMN uid INT;

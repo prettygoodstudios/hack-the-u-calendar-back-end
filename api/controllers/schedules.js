@@ -1,4 +1,4 @@
-const {getSchedulesInDatabase} = require("../models/schedules");
+const {getSchedulesInDatabase, getMySchedulesInDatabase} = require("../models/schedules");
 
 function getSchedules(req, res){
     getSchedulesInDatabase().then((data) => {
@@ -16,6 +16,24 @@ function getSchedules(req, res){
     });
 }
 
+function getMySchedules(req, res){
+    const {uid} = req.query;
+    getMySchedulesInDatabase(uid).then((data) => {
+        res.send({
+            message: {
+                schedule: data
+            }
+        });
+    }).catch((error) => {
+        res.send({
+            message: {
+                error
+            }
+        });
+    });
+}
+
 module.exports = {
-    getSchedules
+    getSchedules,
+    getMySchedules
 }

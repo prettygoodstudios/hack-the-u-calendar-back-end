@@ -22,7 +22,13 @@ paths:
     x-swagger-router-controller: schedules
     get: 
       description: Gets scheudles
-      operationId: getSchedules
+      operationId: getMySchedules
+      parameters: 
+       - name: uid 
+         in: query
+         description: Uid of schedules owner
+         required: true 
+         type: string 
       responses: 
         "200":
           description: Success
@@ -59,6 +65,11 @@ paths:
          description: End of projects
          type: string
          required: true
+       - name: uid 
+         in: query
+         description: Owner's uid
+         type: string
+         required: true   
       responses: 
         "200":
           description: Success
@@ -72,6 +83,12 @@ paths:
     get: 
       description: Gets projects
       operationId: getProjects
+      parameters:
+       - name: uid 
+         in: query
+         description: Owner's uid
+         type: string
+         required: true  
       responses: 
         "200":
           description: Success
