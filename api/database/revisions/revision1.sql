@@ -9,7 +9,7 @@ CREATE TABLE `calendar_projects` (
   `schid` int(11) NOT NULL,
   PRIMARY KEY (`pid`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE `calendar_sub_projects` (
   `file` varchar(1000) DEFAULT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `calendar_sub_projects` (
   `schid` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE `calendar_users` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
@@ -25,4 +25,4 @@ CREATE TABLE `calendar_users` (
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid_UNIQUE` (`uid`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
