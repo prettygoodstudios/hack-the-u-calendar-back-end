@@ -72,6 +72,50 @@ paths:
             $ref: "#/definitions/ErrorResponse"
   /projects: 
     x-swagger-router-controller: projects
+    patch:
+      description: Update project
+      operationId: updateProject
+      parameters: 
+       - name: name 
+         in: query
+         description: Name of project
+         required: true 
+         type: string 
+       - name: type 
+         in: query
+         description: Type of project 
+         type: number 
+         required: true 
+       - name: start_time
+         in: query 
+         description: Start of project 
+         type: string 
+         required: true
+       - name: deadline 
+         in: query
+         description: End of projects
+         type: string
+         required: true
+       - name: uid 
+         in: query
+         description: Owner's uid
+         type: string
+         required: true  
+       - name: pid 
+         in: query
+         description: Project's id
+         type: string
+         required: true 
+      responses: 
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ProjectResponse"
+        default: 
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
     post:
       description: Creates project
       operationId: createProject

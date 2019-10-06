@@ -67,8 +67,35 @@ function deleteProjectInDatabase(uid, pid){
     });
 }
 
+function updateProjectInDatabase(pid, uid, name, type, start_time, deadline){
+    return new Promise((resolve, reject) => {
+        getProjectInDatabase(pid).then((project) => {
+            if(project && project.uid == uid){
+                connection.query("UPDATE calendar_schedules SET start_time = ?, deadline = ? WHERE pid = ? ", [start_time, deadline, pid], (error, results, fields) => {
+                    if(error){
+                        reject(error);
+                    }else{
+                        connection.query("UPDATE calendar_projects SET name = ?, type = ? WHERE pid = ?", [name, type, pid], (error, results, fields) => {
+                            if(error){
+                                reject(error);
+                            }else{
+                                resolve(results);
+                            }
+                        });
+                    }
+                });
+            }else if(project){
+                reject("You do not have permission to delete this project.");
+            }else{
+                reject("Project not found.");
+            }
+        });
+    });
+}
+
 module.exports = {
     createProjectInDatabase,
     getProjectsInDatabase,
-    deleteProjectInDatabase
+    deleteProjectInDatabase,
+    updateProjectInDatabase
 }

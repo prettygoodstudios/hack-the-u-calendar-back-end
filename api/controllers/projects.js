@@ -1,4 +1,4 @@
-const {createProjectInDatabase, getProjectsInDatabase, deleteProjectInDatabase} = require("../models/projects");
+const {createProjectInDatabase, getProjectsInDatabase, deleteProjectInDatabase, updateProjectInDatabase} = require("../models/projects");
 
 function createProject(req, res){
     const {start_time, deadline, name, type, uid} = req.query;
@@ -55,8 +55,27 @@ function deleteProject(req, res){
     })
 }
 
+function updateProject(req, res){
+    const {uid, pid, name, type, deadline, start_time} = req;
+    updateProjectInDatabase(pid, uid, name, type, start_time, deadline).then((data) => {
+        res.send({
+            message: {
+                project: data
+            }
+        });
+    }).catch((error) => {
+        res.status(400);
+        res.send({
+            message: {
+                error: "Could not update project."
+            }
+        })
+    });
+}
+
 module.exports = {
     createProject,
     getProjects,
-    deleteProject
+    deleteProject,
+    updateProject
 }
