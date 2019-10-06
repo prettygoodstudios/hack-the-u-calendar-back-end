@@ -18,6 +18,21 @@ consumes:
 produces:
   - application/json
 paths:
+  /schedules:
+    x-swagger-router-controller: schedules
+    get: 
+      description: Gets scheudles
+      operationId: getSchedules
+      responses: 
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ProjectResponse"
+        default: 
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /projects: 
     x-swagger-router-controller: projects
     post:
@@ -118,6 +133,12 @@ definitions:
       message: 
         type: object
   ProjectResponse:
+    required:
+      - message
+    properties:
+      message: 
+        type: object
+  ScheduleResponse:
     required:
       - message
     properties:
