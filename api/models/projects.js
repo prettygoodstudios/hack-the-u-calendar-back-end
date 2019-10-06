@@ -49,7 +49,13 @@ function deleteProjectInDatabase(uid, pid){
                     if(error){
                         reject(error);
                     }else{
-                        resolve("Successfully deleted project!");
+                        connection.query("DELETE FROM calendar_projects WHERE ISNULL(pid)", (error, results, fields) => {
+                            if(error){
+                                reject(error);
+                            }else{
+                                resolve("Successfully deleted project!");
+                            }
+                        });
                     }
                 });
             }else if(project){
