@@ -54,6 +54,19 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    get: 
+      description: Gets projects
+      operationId: getProjects
+      responses: 
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ProjectResponse"
+        default: 
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /users: 
     x-swagger-router-controller: users
     get: 
