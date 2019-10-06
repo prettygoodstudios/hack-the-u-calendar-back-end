@@ -56,7 +56,7 @@ function deleteProject(req, res){
 }
 
 function updateProject(req, res){
-    const {uid, pid, name, type, deadline, start_time} = req;
+    const {uid, pid, name, type, deadline, start_time} = req.query;
     updateProjectInDatabase(pid, uid, name, type, start_time, deadline).then((data) => {
         res.send({
             message: {

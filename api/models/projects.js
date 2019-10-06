@@ -31,7 +31,7 @@ function getProjectsInDatabase(uid){
 
 function getProjectInDatabase(pid){
     return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM calendar_Projects WHERE pid = ? ", [pid], (error, results, fields) => {
+        connection.query("SELECT * FROM calendar_projects WHERE pid = ? ", [pid], (error, results, fields) => {
             if(error){
                 reject(error);
             }else{
@@ -71,7 +71,7 @@ function updateProjectInDatabase(pid, uid, name, type, start_time, deadline){
     return new Promise((resolve, reject) => {
         getProjectInDatabase(pid).then((project) => {
             if(project && project.uid == uid){
-                connection.query("UPDATE calendar_schedules SET start_time = ?, deadline = ? WHERE pid = ? ", [start_time, deadline, pid], (error, results, fields) => {
+                connection.query("UPDATE calendar_schedules SET start_time = ?, deadline = ? WHERE sid IN (SELECT schid FROM calendar_projects WHERE pid = ?) ", [start_time, deadline, pid], (error, results, fields) => {
                     if(error){
                         reject(error);
                     }else{
@@ -89,6 +89,8 @@ function updateProjectInDatabase(pid, uid, name, type, start_time, deadline){
             }else{
                 reject("Project not found.");
             }
+        }).catch((error) => {
+            reject(error);
         });
     });
 }
