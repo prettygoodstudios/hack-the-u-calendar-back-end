@@ -1,4 +1,4 @@
-const {createProjectInDatabase, getProjectsInDatabase} = require("../models/projects");
+const {createProjectInDatabase, getProjectsInDatabase, deleteProjectInDatabase} = require("../models/projects");
 
 function createProject(req, res){
     const {start_time, deadline, name, type, uid} = req.query;
@@ -34,8 +34,25 @@ function getProjects(req, res){
     });
 }
 
+function deleteProject(req, res){
+    const {uid, pid} = req.query;
+    deleteProjectInDatabase(uid, pid).then((success) => {
+        res.send({
+            message: {
+                success
+            }
+        });
+    }).catch((error) => {
+        res.send({
+            message: {
+                error
+            }
+        })
+    })
+}
 
 module.exports = {
     createProject,
-    getProjects
+    getProjects,
+    deleteProject
 }

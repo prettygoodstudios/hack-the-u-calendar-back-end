@@ -29,7 +29,40 @@ function getProjectsInDatabase(uid){
     })
 }
 
+function getProjectInDatabase(pid){
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT * FROM calendar_Projects WHERE pid = ? ", [pid], (error, results, fields) => {
+            if(error){
+                reject(error);
+            }else{
+                resolve(results[0]);
+            }
+        });
+    })
+}
+
+function deleteProjectInDatabase(uid, pid){
+    return new Promise((resolve, reject) => {
+        getProjectInDatabase(pid).then((project) => {
+            if(project && project.uid == uid){
+                connection.query("DELETE FROM calendar_projects WHERE pid = ?", [pid], (error, results, fields) => {
+                    if(error){
+                        reject(error);
+                    }else{
+                        resolve("Successfully deleted project!");
+                    }
+                });
+            }else if(project){
+                reject("You do not have permission to delete this project.");
+            }else{
+                reject("Project not found.");
+            }
+        });
+    });
+}
+
 module.exports = {
     createProjectInDatabase,
-    getProjectsInDatabase
+    getProjectsInDatabase,
+    deleteProjectInDatabase
 }

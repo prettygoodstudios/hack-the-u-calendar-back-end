@@ -34,7 +34,7 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/ProjectResponse"
+            $ref: "#/definitions/ScheduleResponse"
         default: 
           description: Error
           schema:
@@ -89,6 +89,30 @@ paths:
          description: Owner's uid
          type: string
          required: true  
+      responses: 
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/ProjectResponse"
+        default: 
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete: 
+      description: Deletes project
+      operationId: deleteProject
+      parameters:
+       - name: uid 
+         in: query
+         description: Owner's uid
+         type: string
+         required: true 
+       - name: pid 
+         in: query
+         description: Project's id
+         type: string
+         required: true 
       responses: 
         "200":
           description: Success
