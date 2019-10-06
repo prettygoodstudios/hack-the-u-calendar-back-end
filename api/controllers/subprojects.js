@@ -3,6 +3,7 @@ const {createSubProjectInDatabase} = require("../models/subprojects");
 function createSubProject(req, res){
     const {schid, name, pid} = req.query;
     createSubProjectInDatabase(schid, name, pid).then((data) => {
+        res.status(201);
         res.send({
             message: {
                 success: "Successfully created sub project!"

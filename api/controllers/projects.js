@@ -3,6 +3,7 @@ const {createProjectInDatabase, getProjectsInDatabase, deleteProjectInDatabase} 
 function createProject(req, res){
     const {start_time, deadline, name, type, uid} = req.query;
     createProjectInDatabase(name, type, start_time, deadline, uid).then((data) => {
+        res.status(201);
         res.send({
             message: {
                 success: "Successfully created project!"
