@@ -9,7 +9,7 @@
   "main": "app.js",
   "dependencies": {
     "deep-extend": "^0.5.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "lodash": "^4.17.13",
     "mysql2": "^1.7.0",
     "superagent": "^3.7.0",
